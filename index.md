@@ -178,5 +178,100 @@ UIViewcontroller.view
 
 ##### 5.UIButton 如果注册了一个点击事件，点击事件不会往父级传递。
 
+##### 6.响应者链条：触摸事件产生以后，所有执行touchBegan的响应者对象
+
 ### 手势解锁demo
 [手势解锁.zip](https://github.com/EijiCcccc/learing/files/7526086/default.zip)
+
+
+[image](https://user-images.githubusercontent.com/45653681/141438045-47088789-fbea-41e6-84e4-e48a595bfdee.png)
+
+
+## 手势识别 Gesture Recognizer
+
+### UITapGestureRecognizer
+
+   //单机，多次点击事件
+   UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget: self action: @selector(tap:)];
+   
+   tap.numberOfTapsRequired = 2;
+   
+   tap.numberOfTouchesRequired = 2;
+
+   [self.image addGestureRecognizer: tap];
+
+### UILongPressGestureRecognizer
+
+     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget: self action: @selector(longPress:)];
+    
+    //长按时间
+    longPress.minimumPressDuration = 3;
+    
+    //偏移距离
+    longPress.allowableMovement = 10;
+    
+    [self.image addGestureRecognizer: longPress];
+    
+### UISwipeGestureRecognizer
+
+    UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget: self action: @selector(swipe:)];
+    
+    //轻扫方向， 如果写成 UISwipeGestureRecognizerDirectionLeft ｜ UISwipeGestureRecognizerDirectionRight
+    //判断的时候无法判断方向
+    swipe.direction = UISwipeGestureRecognizerDirectionLeft;
+    
+    [self.image addGestureRecognizer: swipe];
+    
+ //实现图片根据swipe手势旋转
+ 
+ -(void)rotation: (UIRotationGestureRecognizer *)sender {
+     <!-- sender.rotation 转动的角度 -->
+    NSLog(@"%f", sender.rotation);
+    
+    
+     <!--  转到某个角度(每次都以原位置为0开始)， 但是第二次旋转时，图片会突然从0开始   -->
+     <!--     self.image.transform = CGAffineTransformMakeRotation(sender.rotation); -->
+    
+     <!--   转动某个角度，如果手势旋转度数为 10， 20， 30，则图片旋转 10， 30， 60(较原位置)  -->
+    self.image.transform = CGAffineTransformRotate(self.image.transform, sender.rotation);
+    
+    //需要恢复到初始的状态，下次转动不会累加之前的度数。
+    sender.rotation = 0;
+}
+    
+### UIPinchGestureRecognizer
+
+     UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget: self action: @selector(pinch:)];
+     
+    [self.image addGestureRecognizer: pinch];
+    
+    实现图片跟随缩放手势
+
+     -(void)pinch: (UIPinchGestureRecognizer *)sender {
+     
+         NSLog(@"%f", sender.scale);
+         
+          <!--          原理同rotation -->
+         self.image.transform = CGAffineTransformScale(self.image.transform, sender.scale, sender.scale);
+    
+         sender.scale = 1;
+         
+     }
+   
+### UIPanGestureRecognizer
+
+     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget: self action:@selector(pan:)];
+    
+    [self.image addGestureRecognizer: pan];
+    
+    图片根据拖拽移动
+    -(void)pan: (UIPanGestureRecognizer *) sender {
+    
+         <!--   需要从sender.view 中获取点击的point   -->
+         CGPoint p = [sender translationInView: sender.view];
+
+         self.image.transform = CGAffineTransformTranslate(self.image.transform, p.x, p.y);
+          <!-- 需要归0，setTranslation -->
+         [sender setTranslation: CGPointZero inView: sender.view];
+     }
+    
