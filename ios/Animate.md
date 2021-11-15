@@ -26,6 +26,7 @@
       
       <!--   不希望回到原来的位置     -->
       anim.fillMode = kCAFillModeForwards;
+      <!--    如果不设置removedOnCompletion，那么fillMode不起作用    -->
       anim.removedOnCompletion = NO;
       
       <!--     添加动画，对谁做动画   -->
@@ -114,4 +115,12 @@
  
     转场效果
    ![image](https://user-images.githubusercontent.com/45653681/141759985-611c65bd-225b-4a6b-9225-54ebb6c2a89f.png)
+
+## 禁止隐世动画，控件的根layer是没有隐式动画
+       [CATransaction begin];
+       [CATransaction setDisableActions:YES];
+       [CATransaction commit];
+
+## layer 的transform 属性
+layer的transform 是一个CATransform3D类型，x、y、z轴
 
