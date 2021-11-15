@@ -40,69 +40,74 @@
   
 ## 3.时钟实例
 
-### 添加钟表
-  CALayer *clock = [[CALayer alloc] init];
-  
-  clock.bounds = CGRectMake(0, 0, 200, 200);
-  
-  clock.position = CGPointMake(200, 200);
+<!-- 添加钟表 -->
 
-  clock.contents =  (__bridge id)[UIImage imageNamed:@"p1"].CGImage;
-  
-  clock.cornerRadius = 100;
-  
-  clock.masksToBounds = YES;
-  
-### 添加秒针
+     -(void)viewDidLoad {
 
-  CALayer *second = [[CALayer alloc] init];
-  
-  second.bounds = CGRectMake(0, 0, 2, 100);
-  
-  second.position = clock.position;
-  
-  second.backgroundColor = [UIColor redColor].CGColor;
-  
-<!--   //锚点 -->
-  second.anchorPoint = CGPointMake(0.5, 0.8);
-  
-  self.second = second;
-    
-  [self.view.layer addSublayer: clock];
-  
-  [self.view.layer addSublayer: second];
-  
-<!--   //每秒调用一次 -->
-  //[NSTimer scheduledTimerWithTimeInterval: 1 target:self selector:@selector(timeChanged) userInfo: nil repeats:YES];
-  
-<!--   //每秒60帧，定时器 -->
-  CADisplayLink *link = [CADisplayLink displayLinkWithTarget: self selector:@selector(timeChanged)];
-  
-  [link addToRunLoop: [NSRunLoop mainRunLoop] forMode: NSDefaultRunLoopMode];
-  
-  [self timeChanged];
+          CALayer *clock = [[CALayer alloc] init];
+
+          clock.bounds = CGRectMake(0, 0, 200, 200);
+
+          clock.position = CGPointMake(200, 200);
+
+          clock.contents =  (__bridge id)[UIImage imageNamed:@"p1"].CGImage;
+
+          clock.cornerRadius = 100;
+
+          clock.masksToBounds = YES;
+
+            <!-- 添加秒针 -->
+
+          CALayer *second = [[CALayer alloc] init];
+
+          second.bounds = CGRectMake(0, 0, 2, 100);
+
+          second.position = clock.position;
+
+          second.backgroundColor = [UIColor redColor].CGColor;
+
+            <!--   //锚点 -->
+          second.anchorPoint = CGPointMake(0.5, 0.8);
+
+          self.second = second;
+
+          [self.view.layer addSublayer: clock];
+
+          [self.view.layer addSublayer: second];
+
+            <!--   每秒调用一次 -->
+            <!--   [NSTimer scheduledTimerWithTimeInterval: 1 target:self selector:@selector(timeChanged) userInfo: nil repeats:YES]; -->
+
+            <!--   每秒60帧，定时器 -->
+          CADisplayLink *link = [CADisplayLink displayLinkWithTarget: self selector:@selector(timeChanged)];
+
+          [link addToRunLoop: [NSRunLoop mainRunLoop] forMode: NSDefaultRunLoopMode];
+
+          [self timeChanged];
+
+    }
   
 ### 实现timeChanged方法
 
--(void)timeChanged {
+    -(void)timeChanged {
 
-    NSLog(@"time");
-    
-    CGFloat angle = 2 * M_PI / 60;
-    
-    NSDate *date = [NSDate date];
-    
-    <!--  使用日期格式转化获取。NSDateFormatter   -->
-    <!--  NSDateFormatter *formatter = [[NSDateFormatter alloc] init];    -->
-    <!--  formatter.dateFormat = @"ss";    -->
-    <!--  CGFloat time = [[formatter stringFromDate: date] floatValue];    -->
-    <!--  self.second.affineTransform = CGAffineTransformRotate(self.second.affineTransform,  angle);    -->
-    
-    //根据日历获取
-    NSCalendar *cal = [NSCalendar currentCalendar];
-    
-    CGFloat time = [cal component: NSCalendarUnitSecond fromDate: date];
-    
-    self.second.affineTransform = CGAffineTransformMakeRotation(angle * time);
-    
-}
+        NSLog(@"time");
+
+        CGFloat angle = 2 * M_PI / 60;
+
+        NSDate *date = [NSDate date];
+
+        <!--  使用日期格式转化获取。NSDateFormatter   -->
+        <!--  NSDateFormatter *formatter = [[NSDateFormatter alloc] init];    -->
+        <!--  formatter.dateFormat = @"ss";    -->
+        <!--  CGFloat time = [[formatter stringFromDate: date] floatValue];    -->
+        <!--  self.second.affineTransform = CGAffineTransformRotate(self.second.affineTransform,  angle);    -->
+
+        //根据日历获取
+        NSCalendar *cal = [NSCalendar currentCalendar];
+
+        CGFloat time = [cal component: NSCalendarUnitSecond fromDate: date];
+
+        self.second.affineTransform = CGAffineTransformMakeRotation(angle * time);
+
+    }
