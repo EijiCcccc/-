@@ -116,7 +116,7 @@
     转场效果
    ![image](https://user-images.githubusercontent.com/45653681/141759985-611c65bd-225b-4a6b-9225-54ebb6c2a89f.png)
 
-## 禁止隐世动画，控件的根layer是没有隐式动画
+## 禁止隐式动画，控件的根layer是没有隐式动画
        [CATransaction begin];
        [CATransaction setDisableActions:YES];
        [CATransaction commit];
