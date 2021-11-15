@@ -115,6 +115,3 @@
     转场效果
    ![image](https://user-images.githubusercontent.com/45653681/141759985-611c65bd-225b-4a6b-9225-54ebb6c2a89f.png)
 
-
-画板demo
- 
