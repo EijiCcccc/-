@@ -9,13 +9,13 @@
 
   UIView *redView = [[UIView alloc] init];
   
-  //边框
+<!--   //边框 -->
   
   redView.layer.borderWidth = 10;
   
   redView.layer.borderColor = [UIColor grayColor].CGColor;
   
-  //阴影
+<!--   //阴影 -->
   redView.layer.shadowOffset = CGSizeZero;
   
   redView.layer.shadowColor = [UIColor blueColor].CGColor;
@@ -24,18 +24,18 @@
   
   redView.layer.shadowRadius = 50;
 
-  //圆角
+<!--   //圆角 -->
   redView.layer.cornerRadius = 50;
   
   redView.layer.masksToBounds = YES;
     
-  //bounds
+<!--   //bounds -->
   redView.layer.bounds = CGRectMake(0, 0, 200, 200);
   
-  //位置,默认情况下，center
+<!--   //位置,默认情况下，center -->
   redView.layer.position = CGPointMake(0, 0);
   
-  //视图内容
+<!--   //视图内容 -->
   redView.layer.contents = CFBridgingRelease([UIImage imageNamed:@""].CGImage);
   
 ## 3.时钟实例
@@ -63,7 +63,7 @@
   
   second.backgroundColor = [UIColor redColor].CGColor;
   
-  //锚点
+<!--   //锚点 -->
   second.anchorPoint = CGPointMake(0.5, 0.8);
   
   self.second = second;
@@ -72,10 +72,10 @@
   
   [self.view.layer addSublayer: second];
   
-  //每秒调用一次
+<!--   //每秒调用一次 -->
   //[NSTimer scheduledTimerWithTimeInterval: 1 target:self selector:@selector(timeChanged) userInfo: nil repeats:YES];
   
-  //每秒60帧，定时器
+<!--   //每秒60帧，定时器 -->
   CADisplayLink *link = [CADisplayLink displayLinkWithTarget: self selector:@selector(timeChanged)];
   
   [link addToRunLoop: [NSRunLoop mainRunLoop] forMode: NSDefaultRunLoopMode];
