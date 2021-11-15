@@ -36,7 +36,7 @@
   redView.layer.position = CGPointMake(0, 0);
   
 <!--   //视图内容 -->
-  redView.layer.contents = CFBridgingRelease([UIImage imageNamed:@""].CGImage);
+  redView.layer.contents = (__bridge id)[UIImage imageNamed:@""].CGImage;
   
 ## 3.时钟实例
 
