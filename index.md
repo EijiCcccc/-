@@ -278,6 +278,7 @@ UIViewcontroller.view
      
      
 ### 多手势冲突
+     添加代理后实现代理方法
      
      - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:       (UIGestureRecognizer *)otherGestureRecognizer {
           return YES;
