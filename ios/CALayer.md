@@ -7,36 +7,36 @@
     
 ## 2.CALayer属性
 
-  UIView *redView = [[UIView alloc] init];
-  
-<!--   //边框 -->
-  
-  redView.layer.borderWidth = 10;
-  
-  redView.layer.borderColor = [UIColor grayColor].CGColor;
-  
-<!--   //阴影 -->
-  redView.layer.shadowOffset = CGSizeZero;
-  
-  redView.layer.shadowColor = [UIColor blueColor].CGColor;
-  
-  redView.layer.shadowOpacity = 1;
-  
-  redView.layer.shadowRadius = 50;
+      UIView *redView = [[UIView alloc] init];
 
-<!--   //圆角 -->
-  redView.layer.cornerRadius = 50;
-  
-  redView.layer.masksToBounds = YES;
-    
-<!--   //bounds -->
-  redView.layer.bounds = CGRectMake(0, 0, 200, 200);
-  
-<!--   //位置,默认情况下，center -->
-  redView.layer.position = CGPointMake(0, 0);
-  
-<!--   //视图内容 -->
-  redView.layer.contents = (__bridge id)[UIImage imageNamed:@""].CGImage;
+    <!--   //边框 -->
+
+      redView.layer.borderWidth = 10;
+
+      redView.layer.borderColor = [UIColor grayColor].CGColor;
+
+    <!--   //阴影 -->
+      redView.layer.shadowOffset = CGSizeZero;
+
+      redView.layer.shadowColor = [UIColor blueColor].CGColor;
+
+      redView.layer.shadowOpacity = 1;
+
+      redView.layer.shadowRadius = 50;
+
+    <!--   //圆角 -->
+      redView.layer.cornerRadius = 50;
+
+      redView.layer.masksToBounds = YES;
+
+    <!--   //bounds -->
+      redView.layer.bounds = CGRectMake(0, 0, 200, 200);
+
+    <!--   //位置,默认情况下，center -->
+      redView.layer.position = CGPointMake(0, 0);
+
+    <!--   //视图内容 -->
+      redView.layer.contents = (__bridge id)[UIImage imageNamed:@""].CGImage;
   
 ## 3.时钟实例
 
