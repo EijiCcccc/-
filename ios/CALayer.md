@@ -92,15 +92,11 @@
     
     NSDate *date = [NSDate date];
     
-//   使用日期格式转化获取。NSDateFormatter
-
-//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-
-//    formatter.dateFormat = @"ss";
-
-//    CGFloat time = [[formatter stringFromDate: date] floatValue];
-
-//    self.second.affineTransform = CGAffineTransformRotate(self.second.affineTransform,  angle);
+    <!--  使用日期格式转化获取。NSDateFormatter   -->
+    <!--  NSDateFormatter *formatter = [[NSDateFormatter alloc] init];    -->
+    <!--  formatter.dateFormat = @"ss";    -->
+    <!--  CGFloat time = [[formatter stringFromDate: date] floatValue];    -->
+    <!--  self.second.affineTransform = CGAffineTransformRotate(self.second.affineTransform,  angle);    -->
     
     //根据日历获取
     NSCalendar *cal = [NSCalendar currentCalendar];
