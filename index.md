@@ -274,4 +274,11 @@ UIViewcontroller.view
           <!-- 需要归0，setTranslation -->
          [sender setTranslation: CGPointZero inView: sender.view];
      }
-    
+     }
+     
+     
+### 多手势冲突
+     
+     - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:       (UIGestureRecognizer *)otherGestureRecognizer {
+          return YES;
+}
