@@ -42,7 +42,7 @@
     - (void)loadView {
       self.view = [[CYView alloc] initWithFrame: [UIScreen mainScreen].bounds];
       self.view.backgroundColor = [UIColor whiteColor];
-   }
+    }
    
     - (void)createBehavior {
     
