@@ -160,27 +160,27 @@
   
 ## UIPushBehavior
   
-  - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    
-    UITouch *t = touches.anyObject;
-    CGPoint p = [t locationInView: t.view];
-    
-    self.animator = [[UIDynamicAnimator alloc] initWithReferenceView: self.view];
-    
-    <!--    UIPushBehaviorModeContinuous, 持续的推力（越来越大） -->
-    <!--     UIPushBehaviorModeInstantaneous 瞬时的推力（越来越慢） -->
-    UIPushBehavior *push = [[UIPushBehavior alloc] initWithItems: @[self.redView] mode: UIPushBehaviorModeContinuous];
-    
-    <!--  量级   -->
-    push.magnitude = 1;
-    
-    <!--  修改推力的方向 push.angle = M_PI; 或者 -->
-    CGFloat offsetX = p.x - self.redView.center.x;
-    CGFloat offsetY = p.y - self.redView.center.y;
-    push.pushDirection = CGVectorMake(offsetX / 30, offsetY / 30);
-    
-    [self.animator addBehavior: push];
-  }
+    -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+
+      UITouch *t = touches.anyObject;
+      CGPoint p = [t locationInView: t.view];
+
+      self.animator = [[UIDynamicAnimator alloc] initWithReferenceView: self.view];
+
+      <!--    UIPushBehaviorModeContinuous, 持续的推力（越来越大） -->
+      <!--     UIPushBehaviorModeInstantaneous 瞬时的推力（越来越慢） -->
+      UIPushBehavior *push = [[UIPushBehavior alloc] initWithItems: @[self.redView] mode: UIPushBehaviorModeContinuous];
+
+      <!--  量级   -->
+      push.magnitude = 1;
+
+      <!--  修改推力的方向 push.angle = M_PI; 或者 -->
+      CGFloat offsetX = p.x - self.redView.center.x;
+      CGFloat offsetY = p.y - self.redView.center.y;
+      push.pushDirection = CGVectorMake(offsetX / 30, offsetY / 30);
+
+      [self.animator addBehavior: push];
+    }
   
 ## UIDynamicItemBehavior 动力学元素，赋予自身属性
   
