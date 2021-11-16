@@ -198,3 +198,10 @@
     @property (readwrite, nonatomic) CGFloat resistance; // 0: no velocity damping
     <!--  角阻力  -->
     @property (readwrite, nonatomic) CGFloat angularResistance; // 0: no angular velocity damping
+
+
+
+[拖拽.zip](https://github.com/EijiCcccc/learing/files/7545779/default.zip)
+[happyBird.zip](https://github.com/EijiCcccc/learing/files/7545782/happyBird.zip)
+
+
