@@ -111,3 +111,90 @@
   
       }
     }
+
+## UISnapBehavior 吸附行为
+    UISnapBehavior *snap = [[UISnapBehavior alloc] initWithItem:self.redView snapToPoint: p];
+    //减速程度
+    snap.damping = 0;
+    [self.animator addBehavior: snap];
+    
+## UIAttachmentBehavior
+  2个点进行连线，赋予作用力
+
+  - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+
+      self.animator = [[UIDynamicAnimator alloc] initWithReferenceView: self.view];
+
+      UITouch *t = touches.anyObject;
+      CGPoint p = [t locationInView: t.view];
+
+      self.attach = [[UIAttachmentBehavior alloc] initWithItem: self.redView attachedToAnchor:p];
+      
+      self.attach.length = 100;
+       
+      <!--  频率 -->
+      self.attach.frequency = 0.5;
+      <!--  弹性程度    -->
+      self.attach.damping = 0.5;
+
+      UIGravityBehavior *gravity = [[UIGravityBehavior alloc] initWithItems: @[self.redView]];
+
+      [self.animator addBehavior: gravity];
+      [self.animator addBehavior:self.attach];
+
+  }
+  
+### 创建方式
+  <!--  附着view的中点 和 点 进行连线 -->
+  - (instancetype)initWithItem:(id <UIDynamicItem>)item attachedToAnchor:(CGPoint)point;
+  
+  <!--  附着view的自定义锚点 和 点 进行连线 -->
+  - (instancetype)initWithItem:(id <UIDynamicItem>)item offsetFromCenter:(UIOffset)offset attachedToAnchor:(CGPoint)point NS_DESIGNATED_INITIALIZER;
+
+  <!--  附着view的中点 和 另外一个view的中点 进行连线 -->
+  - (instancetype)initWithItem:(id <UIDynamicItem>)item1 attachedToItem:(id <UIDynamicItem>)item2;
+  
+  
+  <!--  附着view的的自定义锚点 和 另外一个view的的自定义锚点 进行连线 -->
+  - (instancetype)initWithItem:(id <UIDynamicItem>)item1 offsetFromCenter:(UIOffset)offset1 attachedToItem:(id <UIDynamicItem>)item2 offsetFromCenter:(UIOffset)offset2 NS_DESIGNATED_INITIALIZER;
+  
+## UIPushBehavior
+  
+  - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    
+    UITouch *t = touches.anyObject;
+    CGPoint p = [t locationInView: t.view];
+    
+    self.animator = [[UIDynamicAnimator alloc] initWithReferenceView: self.view];
+    
+    <!--    UIPushBehaviorModeContinuous, 持续的推力（越来越大） -->
+    <!--     UIPushBehaviorModeInstantaneous 瞬时的推力（越来越慢） -->
+    UIPushBehavior *push = [[UIPushBehavior alloc] initWithItems: @[self.redView] mode: UIPushBehaviorModeContinuous];
+    
+    <!--  量级   -->
+    push.magnitude = 1;
+    
+    <!--  修改推力的方向 push.angle = M_PI; 或者 -->
+    CGFloat offsetX = p.x - self.redView.center.x;
+    CGFloat offsetY = p.y - self.redView.center.y;
+    push.pushDirection = CGVectorMake(offsetX / 30, offsetY / 30);
+    
+    [self.animator addBehavior: push];
+  }
+  
+## UIDynamicItemBehavior 动力学元素，赋予自身属性
+  
+  <!--   创建UIDynamicItemBehavior动力学元素 -->
+  - (instancetype)initWithItems:(NSArray<id <UIDynamicItem>> *)items NS_DESIGNATED_INITIALIZER;
+  UIDynamicItemBehavior *itemBehavior = [[UIDynamicItemBehavior alloc] initWithItems:@[self.redView]];
+
+  <!-- 弹力  -->
+  @property (readwrite, nonatomic) CGFloat elasticity; // Usually between 0 (inelastic) and 1 (collide elastically) 
+  <!-- 摩擦力   -->
+  @property (readwrite, nonatomic) CGFloat friction; // 0 being no friction between objects slide along each other
+  <!-- 密度   -->
+  @property (readwrite, nonatomic) CGFloat density; // 1 by default
+  <!--  抵抗力  -->
+  @property (readwrite, nonatomic) CGFloat resistance; // 0: no velocity damping
+  <!--  角阻力  -->
+  @property (readwrite, nonatomic) CGFloat angularResistance; // 0: no angular velocity damping
